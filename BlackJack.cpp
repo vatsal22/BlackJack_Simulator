@@ -110,7 +110,8 @@ int bustThreshold(int threshold)
 
 void whenToStand()
 {
-    cout << "Bust Threshold: \n(threshold, bust fraction):" << endl;
+    
+    cout << "\n(threshold, bust fraction):" << endl;
     for (int i = 10; i <= 20; i++)
     {
 
@@ -235,6 +236,7 @@ void hiLoSim()
 
 int main()
 {
+    cout<<"BlackJack Simulator:"<<endl;
     srand(time(0));
 
     whenToStand();
