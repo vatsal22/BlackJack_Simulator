@@ -37,7 +37,6 @@ int Deck::remainingInDeck()
 
 void Deck::shuffle()
 {
-    srand(time(0));
     for (int i = 0; i < (52 - 1); i++)
     {
         int randnum = i + (rand() % (52 - i));
