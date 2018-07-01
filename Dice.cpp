@@ -87,7 +87,7 @@ void rollDoubleDie(){
 
 int main()
 {
-    cout<<"Dice Simulator:"<<endl;
+    cout<<"\nDice Simulator:"<<endl;
     srand(time(0));
     Dice dice1;
     Dice dice2;

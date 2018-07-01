@@ -110,7 +110,7 @@ int bustThreshold(int threshold)
 
 void whenToStand()
 {
-    
+
     cout << "\n(threshold, bust fraction):" << endl;
     for (int i = 10; i <= 20; i++)
     {
@@ -226,17 +226,19 @@ void hiLoSim()
             { //Got higher than dealer and you bet high
                 numOfRightChoices++;
             }
-        }else{
-            numOfRightChoices+=0.5; //The player and dealer tied, add 0.5 regardless of bet
+        }
+        else
+        {
+            numOfRightChoices += 0.5; //The player and dealer tied, add 0.5 regardless of bet
         }
     }
-    cout <<"\n(good bets fraction): \n"<<((float)numOfRightChoices/10000.0)<<endl;
-
+    cout << "\n(good bets fraction): \n"
+         << ((float)numOfRightChoices / 10000.0) << endl;
 }
 
 int main()
 {
-    cout<<"BlackJack Simulator:"<<endl;
+    cout << "\nBlackJack Simulator:" << endl;
     srand(time(0));
 
     whenToStand();
