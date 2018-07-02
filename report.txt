@@ -1,0 +1,18 @@
+q1. Since each of the 6 sides are equally likely to be thrown, it can be expected that the fraction of each side appearing after 'n' throws should be equal.
+    I.e., 1/6 or 0.1667. When n is a small number like 10, the distribution seems less even, but as n approaches infinity (or a large number like 100000), 
+    the expected distribution is seen. This is because small invariances due to chance matter less to the final fraction.
+
+q2. Since the chances of either of the 6 sides appearing is the same, the chances of any of the high numbers vs any of the low numbers should be the same as 
+    well (i.e. 50%). That being said, there being an exact split between the high and low numbers after n throws is unlikely due to chance. This test is identical
+    to flipping a coin 100 times and seeing whether the number of head matches tails or not. It's not guaranteed that there will be an even split every time, just 
+    that they will be close to each other.
+    
+q3. When using two die, the number that is most likely to appear is 7 because there are more combinations of throws that will yield that number. 2 and 12 are 
+    the least likely (but equally likely as each other) to appear because they only have one combination that will yield those numbers (1+1 or 6+6). To extend 
+    this to the other numbers, the further from 7 we get, the less combinations of rolls there will be to yield those numbers. This in turn creates a bellcurve
+    based on the probabilty of each number appearing, with the bellcurve centered on 7 and the endpoints at 2 and 12. 
+q4. I would choose to stand at a value of 17 because that seems to give a relatively low chance of busting (about 30%) while still being a relatively high number.
+
+q5. The percent of good bets seems to be around 53%. That means just over 50% of bets were correct. To maximize winnings, one could bet the maximum amount of 
+    money for when the running count is positive and bet the minimum (or nothing if possible) if the running count is negative. According to the percentage of 
+    good bets, I would end up benefitting in the long run.  

@@ -139,66 +139,69 @@ void hiLoSim()
     Player dealer;
     Player p1;
     int runningCount = 0;
-    int threshold = 16;
+    int threshold = 17;
     float numOfRightChoices = 0;
+    int numOfGames = 0;
     for (int i = 0; i < 10000; i++)
     {
     BeginningOfLoop:
 
-        int bet = 0; //0 means low bet, 1 mean high/medium bet
+        int bet = 0; //0 means low bet, 1 means high/medium bet
 
         if (runningCount >= 0)
         {
-            bet = 1;
+            bet = 1; //bet high
         }
 
-        dealer.resetCards();
+        dealer.resetCards(); //reset hand
         p1.resetCards();
 
         if (deck.remainingInDeck() <= 0)
         {
-            deck.shuffle();
+            deck.shuffle(); //If deck is empty, reshuffle, reset runningCount
             runningCount = 0;
-            i--;
         }
 
         Card deal = deck.dealOneCard();
-        runningCount += hiOrLowCard(deal);
-        dealer.addCard(deal);
+        runningCount += hiOrLowCard(deal); //Adjust runningCount
+        dealer.addCard(deal);              //Dealer gets face up card
 
-        for (int i = 0; i < 6; i++)
-        { //simulate dealing 2 cards to each player besides p1
-            if (deck.remainingInDeck() <= 0)
+        for (int w = 0; w < 6; w++)
+        {                                    //simulate dealing 2 cards to three players
+            if (deck.remainingInDeck() <= 0) //If deck is empty, restart loop
             {
+
                 goto BeginningOfLoop;
             }
 
             deal = deck.dealOneCard();
-            runningCount += hiOrLowCard(deal);
+            runningCount += hiOrLowCard(deal); //Adjust runningCount for each dealt card
         }
 
         do
-        {
-            if (deck.remainingInDeck() <= 0)
+        {                                    //Simulate player hitting or eventually standing
+            if (deck.remainingInDeck() <= 0) //Deck is empty
             {
+
                 goto BeginningOfLoop;
             }
             deal = deck.dealOneCard();
-            runningCount += hiOrLowCard(deal);
+            runningCount += hiOrLowCard(deal); //Adjust count and deal to player
             p1.addCard(deal);
-        } while (p1.cardsValue() < threshold && p1.cardsValue() < 21);
+        } while (p1.cardsValue() < threshold && p1.cardsValue() < 21); //When player busts or meets threshold, stand
 
         do
-        {
-            if (deck.remainingInDeck() <= 0)
+        {                                    //Simulate dealer hitting/standing
+            if (deck.remainingInDeck() <= 0) //Deck is empty
             {
+
                 goto BeginningOfLoop;
             }
             deal = deck.dealOneCard();
-            runningCount += hiOrLowCard(deal);
+            runningCount += hiOrLowCard(deal); //Adjust count and deal to dealer
             dealer.addCard(deal);
-        } while (dealer.cardsValue() < 17 && dealer.cardsValue() < 21 && dealer.cardsValue() <= p1.cardsValue());
-
+        } while (dealer.cardsValue() < 17 && dealer.cardsValue() < 21 && dealer.cardsValue() <= p1.cardsValue()); //Deal until dealer meets 17, beats player, or busts
+        numOfGames++;
         if (p1.cardsValue() > 21)
         {
             if (bet == 0)
@@ -227,12 +230,20 @@ void hiLoSim()
                 numOfRightChoices++;
             }
         }
-        else
+        else if (p1.cardsValue() == dealer.cardsValue())
         {
-            numOfRightChoices += 0.5; //The player and dealer tied, add 0.5 regardless of bet
+            numOfRightChoices++; //The player and dealer tied, add 1 regardless of bet
+        }
+        else if (p1.cardsValue() < dealer.cardsValue())
+        {
+            if (bet == 0)
+            { //Got lower than dealer but bet low
+                numOfRightChoices++;
+            }
         }
     }
-    cout << "\n(good bets fraction): \n"
+
+    cout << "\n(good bets fraction with threshold=" << threshold << "): \n"
          << ((float)numOfRightChoices / 10000.0) << endl;
 }
 
